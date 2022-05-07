@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using APIWeather.Views;
 
 namespace APIWeather
 {
@@ -10,7 +11,7 @@ namespace APIWeather
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new WeatherPage())
         }
 
         protected override void OnStart()
