@@ -2,55 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 using APIWeather.Model;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace APIWeather.Services
 {
     public class RestService : IRestService
     {
         HttpClient client;
+        JsonSerializerOptions options;
+        RootModel rootModel { get; set; }
 
         public RestService()
         {
             client = new HttpClient();
-        }
-        public async Task<List<WeatherData>> GetWeatherAsync()
-        {
-            List<WeatherData> list = new List<WeatherData>();
-
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
-
-            try
+            options = new JsonSerializerOptions()
             {
-                HttpResponseMessage response = await client.GetAsync(Constants.RestUrl);
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
+        }
+        public async Task<List<EntryModel>> GetWeatherAsync(string city)
+        {
+            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={apiKey}");
+            WeatherRoot weatherData = null;
+            try 
+            {
+
+                var response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
-                    string content = await response.Content.ReadAsStringAsync();
-                    //list = JsonSerializer.Deserialize<List<WeatherData>>(content);
+                    var content = await response.Content.ReadAsStringAsync();
+                    weatherData = JsonConvert.DeserializeObject<WeatherRoot>(content);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine("\t\tERROR {0}", ex.Message);
             }
-            return list;
+
+            return weatherData;
         }
-        public async Task<WeatherData> GetWeatherData(string query)
-        {
-            WeatherData weat = null;
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(query);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    weat = JsonConvert.DeserializeObject<WeatherData>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-            return weat;
-        }
+       
     }
 }
