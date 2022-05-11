@@ -13,9 +13,9 @@ namespace APIWeather.Services
 		{
             restService = service;
 		}
-        public Task<List<EntryModel>> GetWeather(string city)
+        public Task<WeatherRoot> GetWeather(string city)
         {
-            return restService.GetWeatherAsync(city);
+            return Task.Run(()=>restService.GetWeather(city));
         }
 
     }

@@ -6,8 +6,6 @@ using Newtonsoft.Json.Converters;
 
 namespace APIWeather.Model
 {
-	public class WeatherModel
-	{
         public class WeatherRoot
         {
             [JsonProperty("name")]
@@ -126,4 +124,4 @@ namespace APIWeather.Model
             public long Deg { get; set; }
         }
     }
-}
+

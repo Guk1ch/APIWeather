@@ -8,6 +8,6 @@ namespace APIWeather.Services
 {
     public interface IRestService
     {
-        Task<List<EntryModel>> GetWeatherAsync(string city);
+        Task<WeatherRoot> GetWeather(string city);
     }
 }

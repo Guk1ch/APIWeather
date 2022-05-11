@@ -10,6 +10,7 @@ namespace APIWeather
     public class Constants
     {
         public static string RestUrl = "https://api.openweathermap.org/data/2.5/weather";
+        public static string ApiKey = "8ff0af28ae74247a2e74b437e28918c3";
         public static string GetApiKey()
         {
             var assembly = Assembly.GetExecutingAssembly();

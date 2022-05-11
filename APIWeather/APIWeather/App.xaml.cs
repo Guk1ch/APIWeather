@@ -9,11 +9,12 @@ namespace APIWeather
 {
     public partial class App : Application
     {
+        public static WeatherManager weatherManager { get; private set; }
         public App()
         {
             InitializeComponent();
 
-            WeatherManager = new WeatherManager(new RestService());
+            weatherManager = new WeatherManager(new RestService());
             MainPage = new NavigationPage(new WeatherPage());
         }
 

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace APIWeather.Services
 {
@@ -24,11 +25,13 @@ namespace APIWeather.Services
                 WriteIndented = true,
             };
         }
-        public async Task<List<EntryModel>> GetWeatherAsync(string city)
+        
+
+         public async Task<WeatherRoot> GetWeather(string city)
         {
-            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={apiKey}");
+            Uri uri = new Uri($"{Constants.RestUrl}?q={city}&appid={Constants.ApiKey}");
             WeatherRoot weatherData = null;
-            try 
+            try
             {
 
                 var response = await client.GetAsync(uri);
@@ -45,6 +48,5 @@ namespace APIWeather.Services
 
             return weatherData;
         }
-       
     }
 }
