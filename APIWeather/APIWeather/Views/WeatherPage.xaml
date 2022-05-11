@@ -8,12 +8,12 @@
             <StackLayout Spacing="10" Padding="20">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Temp:"/>
-                    <Label Text="{Binding Main.Temp}"/>
+                    <Label Text="{Binding Main.Temperature}"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Feels like:"/>
-                    <Label Text="{Binding Main.Feels_like}"/>
+                    <Label Text="{Binding Main.Humidity}"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal">
