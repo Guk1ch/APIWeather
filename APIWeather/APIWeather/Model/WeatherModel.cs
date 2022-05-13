@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Xamarin.Forms;
 
 namespace APIWeather.Model
 {
         public class WeatherRoot
         {
-            [JsonProperty("name")]
+        [JsonProperty("name")]
             public string Title { get; set; }
 
             [JsonProperty("coord")]
@@ -111,8 +112,21 @@ namespace APIWeather.Model
             [JsonProperty("description")]
             public string Description { get; set; }
 
-            [JsonProperty("icon")]
-            public string Icon { get; set; }
+            //[JsonProperty("icon")]
+            //public string Icon { get; set; }
+         public string Icon { get; set; }
+            public UriImageSource IconImage
+            {
+            get
+                {
+                 return new UriImageSource
+                    {
+                        Uri = new Uri($"https://openweathermap.org/img/wn/{Icon}@2x.png", UriKind.Absolute),
+                        CachingEnabled = true,
+                        CacheValidity = TimeSpan.FromDays(1)
+                    };
+                }
+            }
         }
 
         public class Wind

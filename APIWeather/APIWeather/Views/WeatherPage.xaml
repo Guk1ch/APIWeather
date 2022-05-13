@@ -32,6 +32,7 @@
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Weather:"/>
+                                    <Image x:Name="IconImage" Source="{Binding IconImage}"/>
                                     <Label Text="{Binding Description}"/>
                                 </StackLayout>
                             </ViewCell>
